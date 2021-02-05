@@ -25,15 +25,41 @@ p {
   font-weight: bold;
 }
 
+.tile-mobile {
+  text-align: center;
+  border-bottom: 2px solid black;
+  padding: 5px 15px 5px 15px;
+  margin-bottom: 5px;
+  font-size: 125%;
+  font-weight: bold;
+  display: none;
+}
+
 .textBox {
+  height: 100px;
   clear: right;
   padding: 0px 10px 5px 10px;
+  overflow: hidden;
+}
+
+.textBox:hover {
+  overflow: scroll;
+  cursor: ns-resize;
 }
 
 #banner {
   font-size: 175%;
   text-align: center;
   font-weight: bold;
+}
+
+#banner-mobile {
+  font-size: 150%;
+  font-family: Helvetica;
+  text-align: left;
+  font-weight: bold;
+  margin: 10px;
+  display: none;
 }
 
 #beef {
@@ -142,6 +168,7 @@ p {
   }
 }
 
+
 /********** Mobile Device **********/
 @media (max-width: 767px) {
   .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
@@ -186,4 +213,27 @@ p {
   .col-sm-12 {
     width: 100%;
   }
+
+  /*
+
+  This solution adapted from post at https://stackoverflow.com/questions/11796297/div-show-hide-media-query
+  
+  */
+
+  #banner {
+    display: none;
+  }
+
+  #banner-mobile {
+    display: block;
+  }
+
+  .tile {
+    display: none;
+  }
+
+  .tile-mobile {
+    display: block;
+  }
+
 }
