@@ -13,13 +13,13 @@ function LunchCheckController($scope) {
     var message = "Please enter data first";
     var color = "red";
 
-    if ($scope.itemsString == null || $scope.itemsString.trim == 0){
+    if ($scope.itemsString == null || $scope.itemsString.trim().length == 0){
       // do nothing
     } else {
       color = "green"
       var numItems = $scope.countItems($scope.itemsString);
       if (numItems == 0){
-        message = "You didn't enter anything to count...(commas and blanks don't count as items)";
+        message = "You didn't enter anything to count...(i.e. ', ,' doesn't count as an item)";
       } else if (numItems > 3) {
         message = "Too much!";
       } else {
