@@ -1,0 +1,9 @@
+<div class="loader col-sm-12">
+  <h3 ng-if="search.message">{{search.message}}</h3>
+  <ul>
+    <li ng-repeat="item in search.found">
+      ({{item.short_name}}) {{item.name}}
+      <!--<button class="btn" ng-click="search.remove($index);">Don't want this one!</button>-->
+    </li>
+  </ul>
+</div>
