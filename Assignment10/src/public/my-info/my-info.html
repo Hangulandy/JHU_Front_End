@@ -1,0 +1,16 @@
+<link rel="stylesheet" href="css/public.css">
+
+<div class="container">
+  <div ng-if="myInfoCtrl.info === undefined">
+    Not Signed Up Yet. <a ui-sref="public.sign-up">Sign up Now!</a>
+  </div>
+
+  <div ng-if="myInfoCtrl.info != undefined">
+    <p>First Name : {{myInfoCtrl.info.firstName}}</p>
+    <p>Last Name : {{myInfoCtrl.info.lastName}}</p>
+    <p>Email Address : {{myInfoCtrl.info.email}}</p>
+    <p>Phone Number : {{myInfoCtrl.info.phone}}</p>
+    <p>Favorite : </p>
+    <div><menu-item menu-item="myInfoCtrl.info.favorite"></menu-item></div>
+  </div>
+</div>
