@@ -15,7 +15,7 @@ function SignUpController(MenuService, menuItems) {
   var allShortNames = [];
   for (var i = 0; i < menuItems.menu_items.length; i++) {
     allShortNames.push(menuItems.menu_items[i].short_name.toLowerCase());
-  }
+  };
 
   signUpCtrl.checkFavorite = function() {
     // Do null checking
@@ -34,18 +34,26 @@ function SignUpController(MenuService, menuItems) {
 
   signUpCtrl.submit = function() {
     MenuService.getMenuItemByShortName(signUpCtrl.info.favorite).then(function(result) {
-      signUpCtrl.doesNotExist = false;
-      signUpCtrl.info.favorite = result;
-      signUpCtrl.saveUserToService();
-      signUpCtrl.saved = true;
+      signUpCtrl.setInfoSaved(result);
     }, function(error) {
-      signUpCtrl.doesNotExist = true;
-      signUpCtrl.saved = false;
+      signUpCtrl.setInfoNotSaved();
     });
-  };
+  }
 
   signUpCtrl.saveUserToService = function () {
     MenuService.setUserInfo(signUpCtrl.info);
+  }
+
+  signUpCtrl.setInfoSaved = function (result) {
+    signUpCtrl.doesNotExist = false;
+    signUpCtrl.info.favorite = result;
+    signUpCtrl.saveUserToService();
+    signUpCtrl.saved = true;
+  }
+
+  signUpCtrl.setInfoNotSaved = function () {
+    signUpCtrl.doesNotExist = true;
+    signUpCtrl.saved = false;
   }
 }
 
