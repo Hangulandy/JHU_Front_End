@@ -5,10 +5,10 @@
 angular.module('public')
 .controller('MyInfoController', MyInfoController);
 
-MyInfoController.$inject = ['SignUpService', 'ApiPath'];
-function MyInfoController(SignUpService, ApiPath) {
-  var $ctrl = this;
-  $ctrl.info = SignUpService.getInfo();
+MyInfoController.$inject = ['MenuService'];
+function MyInfoController(MenuService) {
+  var myInfoCtrl = this;
+  myInfoCtrl.info = MenuService.getUserInfo();
 }
 
 })();

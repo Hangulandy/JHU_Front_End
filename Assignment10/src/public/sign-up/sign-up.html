@@ -45,13 +45,13 @@
         <span ng-if="signUpForm.favorite.$error.required && signUpForm.favorite.$touched">
           Please enter a valid menu number for your favorite dish.
         </span>
-        <span ng-if="!focused && (!signUpForm.favorite.$error.required) && signUpCtrl.validNumber">
+        <span ng-if="!focused && (!signUpForm.favorite.$error.required) && signUpCtrl.doesNotExist">
           No such menu number exists.
         </span>
       <br>
 
       <button class="submit-button"
-        ng-disabled="signUpForm.$invalid || signUpCtrl.shortNames.indexOf(signUpCtrl.info.favourite.toLowerCase()) === -1"
+        ng-disabled="signUpForm.$invalid || signUpCtrl.doesNotExist"
         ng-click="signUpCtrl.submit()">Submit</button>
 
     </form>

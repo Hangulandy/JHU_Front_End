@@ -4,40 +4,49 @@
 angular.module('public')
 .controller('SignUpController', SignUpController);
 
-SignUpController.$inject = ['MenuService', 'SignUpService', 'menuItems'];
-function SignUpController(MenuService, SignUpService, menuItems) {
-  var $ctrl = this;
+SignUpController.$inject = ['MenuService', 'menuItems'];
+function SignUpController(MenuService, menuItems) {
+  var signUpCtrl = this;
 
-  var possibleItems = [];
+  signUpCtrl.info = null;
+  signUpCtrl.doesNotExist = true;
 
+  // Get all possible items to check against user input
+  var allShortNames = [];
   for (var i = 0; i < menuItems.menu_items.length; i++) {
-    possibleItems.push(menuItems.menu_items[i].short_name.toLowerCase() + "");
+    allShortNames.push(menuItems.menu_items[i].short_name.toLowerCase());
   }
 
-  $ctrl.checkFavorite = function() {
-    if ($ctrl.info != undefined && $ctrl.info.favorite != undefined) {
-      var favorite = $ctrl.info.favorite.toLowerCase();
-      if (possibleItems.indexOf(favorite) != -1) {
-        $ctrl.exists = true;
+  signUpCtrl.checkFavorite = function() {
+    // Do null checking
+    if (signUpCtrl.info != null && signUpCtrl.info.favorite != undefined) {
+      // Search for short name
+      var favorite = signUpCtrl.info.favorite.toLowerCase();
+      if (allShortNames.indexOf(favorite) != -1) {
+        signUpCtrl.doesNotExist = false;
       } else {
-        $ctrl.exists = false;
+        signUpCtrl.doesNotExist = true;
       }
     } else {
-      $ctrl.exists = false;
+      signUpCtrl.doesNotExist = true;
     }
   }
 
-  $ctrl.submit = function() {
-    MenuService.getMenuItemByShortName($ctrl.info.favorite).then(function(result) {
-      $ctrl.exists = true;
-      $ctrl.info.favorite = result;
-      SignUpService.setInfo($ctrl.info);
-      $ctrl.saved = true;
+  signUpCtrl.submit = function() {
+    MenuService.getMenuItemByShortName(signUpCtrl.info.favorite).then(function(result) {
+      signUpCtrl.doesNotExist = false;
+      signUpCtrl.info.favorite = result;
+      signUpCtrl.saveUserToService();
+      signUpCtrl.saved = true;
     }, function(error) {
-      $ctrl.exists = false;
-      $ctrl.saved = false;
+      signUpCtrl.doesNotExist = true;
+      signUpCtrl.saved = false;
     });
   };
+
+  signUpCtrl.saveUserToService = function () {
+    MenuService.setUserInfo(signUpCtrl.info);
+  }
 }
 
 })();

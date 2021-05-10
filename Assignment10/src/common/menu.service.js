@@ -36,6 +36,14 @@ function MenuService($http, ApiPath) {
     }
   }
 
+  service.setUserInfo = function (info){
+    service.info = info;
+  }
+
+  service.getUserInfo = function (){
+    return service.info;
+  }
+
 }
 
 
